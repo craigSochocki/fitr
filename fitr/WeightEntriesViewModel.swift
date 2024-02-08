@@ -20,21 +20,26 @@ class WeightEntriesViewModel: ObservableObject {
         saveEntries()
     }
     
-    func loadEntries() {
+    func clearEntries() {
+        entries.removeAll() // clear array of entries
+        UserDefaults.standard.removeObject(forKey: "weightEntries")
+    }
+    
+    private func loadEntries() {
         if let entriesData = UserDefaults.standard.data(forKey: "weightEntries"),
            let decodedEntries = try? JSONDecoder().decode([WeightEntry].self, from: entriesData) {
             self.entries = decodedEntries.sorted(by: { $0.timestamp > $1.timestamp })
         }
     }
     
-    func saveEntries() {
+    private func saveEntries() {
         if let encodedEntries = try? JSONEncoder().encode(entries) {
             UserDefaults.standard.set(encodedEntries, forKey: "weightEntries")
         }
     }
-    
-    func clearEntries() {
-        entries.removeAll() // clear array of entries
-        UserDefaults.standard.removeObject(forKey: "weightEntries")
-    }
+}
+
+struct WeightEntry: Codable {
+    let weight: Double
+    let timestamp: Date
 }

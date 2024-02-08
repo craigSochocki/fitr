@@ -25,7 +25,8 @@ struct WeightTrackerView: View {
                     WeightChartView(entries: viewModel.entries)
                         .frame(height: 200)
                         .padding()
-                }}
+                }
+            }
             .navigationTitle("Weight Tracker")
             .navigationBarItems(
                 leading: Button("Clear All") {
