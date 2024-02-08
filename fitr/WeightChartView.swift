@@ -10,6 +10,12 @@ import SwiftUI
 struct WeightChartView: View {
     var entries: [WeightEntry]
     
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        return formatter.string(from: date)
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             Path { path in
@@ -26,14 +32,16 @@ struct WeightChartView: View {
                         path.addLine(to: CGPoint(x: xPosition, y: yPosition))
                     }
                 }
-            }.stroke(Color.blue, lineWidth: 2)
+            }
+            .stroke(Color.blue, lineWidth: 2)
+            
+            // y-axis labels at the edges
+            VStack {
+                Text("\(entries.max(by: { $0.weight < $1.weight })?.weight ?? 0, specifier: "%.0f") lbs")
+                Spacer()
+                Text("\(entries.min(by: { $0.weight < $1.weight })?.weight ?? 0, specifier: "%.0f") lbs")
+            }
+            .padding(.leading)
         }
     }
-}
-
-#Preview {
-    WeightChartView(entries: [
-        WeightEntry(weight: 200.0, timestamp: Date()),
-        WeightEntry(weight: 215.0, timestamp: Date(timeInterval: 86400, since: Date()))
-    ])
 }

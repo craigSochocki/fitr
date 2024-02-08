@@ -14,6 +14,7 @@
 		B84031FD2B75498800885C13 /* WeightTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031FC2B75498800885C13 /* WeightTrackerView.swift */; };
 		B84031FF2B75576F00885C13 /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031FE2B75576F00885C13 /* WeightEntry.swift */; };
 		B84032012B75716800885C13 /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032002B75716800885C13 /* WeightChartView.swift */; };
+		B84032032B75782C00885C13 /* WeightEntriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032022B75782C00885C13 /* WeightEntriesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		B84031FC2B75498800885C13 /* WeightTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTrackerView.swift; sourceTree = "<group>"; };
 		B84031FE2B75576F00885C13 /* WeightEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
 		B84032002B75716800885C13 /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
+		B84032022B75782C00885C13 /* WeightEntriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntriesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				B84031F02B75440100885C13 /* WeightLogView.swift */,
 				B84032002B75716800885C13 /* WeightChartView.swift */,
 				B84031FC2B75498800885C13 /* WeightTrackerView.swift */,
+				B84032022B75782C00885C13 /* WeightEntriesViewModel.swift */,
 				B84031FE2B75576F00885C13 /* WeightEntry.swift */,
 				B84031F22B75440200885C13 /* Assets.xcassets */,
 				B84031F42B75440200885C13 /* Preview Content */,
@@ -151,6 +154,7 @@
 				B84031EF2B75440100885C13 /* fitrApp.swift in Sources */,
 				B84031FF2B75576F00885C13 /* WeightEntry.swift in Sources */,
 				B84031FD2B75498800885C13 /* WeightTrackerView.swift in Sources */,
+				B84032032B75782C00885C13 /* WeightEntriesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

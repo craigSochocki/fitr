@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct WeightLogView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var viewModel: WeightEntriesViewModel
     @State private var weight: String = ""
     @FocusState private var isInputActive: Bool
     @State private var showingConfirmationAlert = false
@@ -29,11 +30,6 @@ struct WeightLogView: View {
                                 }
                             }
                         }
-                }
-                Section {
-                    NavigationLink(destination: WeightTrackerView()) {
-                        Text("View Weight Tracker")
-                    }
                 }
             }
             .navigationTitle("Weight Logger")
@@ -70,30 +66,17 @@ struct WeightLogView: View {
     private func logAndClearWeight() {
         guard let weightValue = Double(weight) else { return }
         
-        let newEntry = WeightEntry(weight: weightValue, timestamp: Date())
-        
-        var entries: [WeightEntry] = []
-        
-        if let entriesData = UserDefaults.standard.data(forKey: "weightEntries"),
-           let decodedEntries = try? JSONDecoder().decode([WeightEntry].self, from: entriesData) {
-            entries = decodedEntries
-        }
-        entries.append(newEntry)
-        
-        if let encodedEntries = try? JSONEncoder().encode(entries) {
-            UserDefaults.standard.set(encodedEntries, forKey: "weightEntries")
-        }
+        viewModel.addEntry(weight: weightValue)
                 
         weight = ""
         weightToConfirm = ""
+        
+        // Dismiss the sheet
+        presentationMode.wrappedValue.dismiss()
     }
     
     private func confirmAndSaveWeight() {
         logAndClearWeight()
         isInputActive = false
     }
-}
-
-#Preview {
-    WeightLogView()
 }

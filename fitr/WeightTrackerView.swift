@@ -9,33 +9,49 @@ import SwiftUI
 
 struct WeightTrackerView: View {
     
-    @State private var entries: [WeightEntry] = []
+    @StateObject var viewModel = WeightEntriesViewModel()
+    @State private var showingLogView = false
+    @State private var showingClearConfirmation = false
     
     var body: some View {
         NavigationView {
             VStack {
-                WeightChartView(entries: entries)
-                    .frame(height: 200)
-                    .padding()
-            }
+                if viewModel.entries.isEmpty {
+                    // No entries have been logged
+                    Text("No weights have been logged yet.")
+                        .foregroundColor(.secondary)
+                        .padding()
+                } else {
+                    WeightChartView(entries: viewModel.entries)
+                        .frame(height: 200)
+                        .padding()
+                }}
             .navigationTitle("Weight Tracker")
-            .onAppear {
-                loadEntries()
+            .navigationBarItems(
+                leading: Button("Clear All") {
+                    showingClearConfirmation = true
+                },
+                trailing: Button(action: {
+                    showingLogView = true
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                })
+            .alert(isPresented: $showingClearConfirmation) {
+                Alert(
+                    title: Text("Are you sure?"),
+                    message: Text("This will permanently delete all your weight entries."),
+                    primaryButton: .destructive(Text("Clear All")){
+                        viewModel.clearEntries()
+                    },
+                    secondaryButton: .cancel())
+            }
+            .sheet(isPresented: $showingLogView) {
+                WeightLogView(viewModel: viewModel)
             }
         }
     }
-    
-    private func loadEntries() {
-        if let entriesData = UserDefaults.standard.data(forKey: "weightEntries"),
-           let decodedEntries = try? JSONDecoder().decode([WeightEntry].self, from: entriesData) {
-            self.entries = decodedEntries.sorted(by: {$0.timestamp > $1.timestamp})
-        }
-    }
-    
-//    private func clearWeightHistory() {
-//        UserDefaults.standard.removeObject(forKey: "userWeights")
-//        weights = []
-//    }
 }
 
 private let dateFormatter: DateFormatter = {
