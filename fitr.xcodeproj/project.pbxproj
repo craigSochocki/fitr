@@ -13,6 +13,7 @@
 		B84031F62B75440200885C13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B84031F52B75440200885C13 /* Preview Assets.xcassets */; };
 		B84031FD2B75498800885C13 /* WeightTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031FC2B75498800885C13 /* WeightTrackerView.swift */; };
 		B84031FF2B75576F00885C13 /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031FE2B75576F00885C13 /* WeightEntry.swift */; };
+		B84032012B75716800885C13 /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032002B75716800885C13 /* WeightChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		B84031F52B75440200885C13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B84031FC2B75498800885C13 /* WeightTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTrackerView.swift; sourceTree = "<group>"; };
 		B84031FE2B75576F00885C13 /* WeightEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
+		B84032002B75716800885C13 /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			children = (
 				B84031EE2B75440100885C13 /* fitrApp.swift */,
 				B84031F02B75440100885C13 /* WeightLogView.swift */,
+				B84032002B75716800885C13 /* WeightChartView.swift */,
 				B84031FC2B75498800885C13 /* WeightTrackerView.swift */,
 				B84031FE2B75576F00885C13 /* WeightEntry.swift */,
 				B84031F22B75440200885C13 /* Assets.xcassets */,
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B84032012B75716800885C13 /* WeightChartView.swift in Sources */,
 				B84031F12B75440100885C13 /* WeightLogView.swift in Sources */,
 				B84031EF2B75440100885C13 /* fitrApp.swift in Sources */,
 				B84031FF2B75576F00885C13 /* WeightEntry.swift in Sources */,

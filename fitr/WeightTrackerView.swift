@@ -13,20 +13,12 @@ struct WeightTrackerView: View {
     
     var body: some View {
         NavigationView {
-            List(entries, id: \.timestamp) {
-                entry in
-                VStack(alignment: .leading) {
-                    Text("\(entry.weight, specifier: "%.0f") lbs")
-                    Text("Logged on \(entry.timestamp, formatter: dateFormatter)")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                
+            VStack {
+                WeightChartView(entries: entries)
+                    .frame(height: 200)
+                    .padding()
             }
             .navigationTitle("Weight Tracker")
-            //            .navigationBarItems(trailing: Button(action: clearWeightHistory){
-            //                Image(systemName: "trash")
-            //            })
             .onAppear {
                 loadEntries()
             }
