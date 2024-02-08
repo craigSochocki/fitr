@@ -42,6 +42,14 @@ struct WeightChartView: View {
                 Text("\(entries.min(by: { $0.weight < $1.weight })?.weight ?? 0, specifier: "%.0f") lbs")
             }
             .padding(.leading)
+            
+            // x-axis labels (start and end dates)
+            HStack {
+                Text(formatDate(entries.first?.timestamp ?? Date()))
+                Spacer()
+                Text(formatDate(entries.last?.timestamp ?? Date()))
+            }
+            .padding(.top, geometry.size.height)
         }
     }
 }
