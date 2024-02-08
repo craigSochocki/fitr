@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		B84031EF2B75440100885C13 /* fitrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031EE2B75440100885C13 /* fitrApp.swift */; };
-		B84031F12B75440100885C13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031F02B75440100885C13 /* ContentView.swift */; };
+		B84031F12B75440100885C13 /* WeightLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031F02B75440100885C13 /* WeightLogView.swift */; };
 		B84031F32B75440200885C13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B84031F22B75440200885C13 /* Assets.xcassets */; };
 		B84031F62B75440200885C13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B84031F52B75440200885C13 /* Preview Assets.xcassets */; };
+		B84031FD2B75498800885C13 /* WeightTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031FC2B75498800885C13 /* WeightTrackerView.swift */; };
+		B84031FF2B75576F00885C13 /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031FE2B75576F00885C13 /* WeightEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B84031EB2B75440100885C13 /* fitr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fitr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84031EE2B75440100885C13 /* fitrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fitrApp.swift; sourceTree = "<group>"; };
-		B84031F02B75440100885C13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B84031F02B75440100885C13 /* WeightLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightLogView.swift; sourceTree = "<group>"; };
 		B84031F22B75440200885C13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B84031F52B75440200885C13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B84031FC2B75498800885C13 /* WeightTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTrackerView.swift; sourceTree = "<group>"; };
+		B84031FE2B75576F00885C13 /* WeightEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				B84031EE2B75440100885C13 /* fitrApp.swift */,
-				B84031F02B75440100885C13 /* ContentView.swift */,
+				B84031F02B75440100885C13 /* WeightLogView.swift */,
+				B84031FC2B75498800885C13 /* WeightTrackerView.swift */,
+				B84031FE2B75576F00885C13 /* WeightEntry.swift */,
 				B84031F22B75440200885C13 /* Assets.xcassets */,
 				B84031F42B75440200885C13 /* Preview Content */,
 			);
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B84031F12B75440100885C13 /* ContentView.swift in Sources */,
+				B84031F12B75440100885C13 /* WeightLogView.swift in Sources */,
 				B84031EF2B75440100885C13 /* fitrApp.swift in Sources */,
+				B84031FF2B75576F00885C13 /* WeightEntry.swift in Sources */,
+				B84031FD2B75498800885C13 /* WeightTrackerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +205,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -254,7 +262,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -275,11 +283,14 @@
 				DEVELOPMENT_TEAM = 66WW7853TA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = fitr;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,11 +315,14 @@
 				DEVELOPMENT_TEAM = 66WW7853TA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = fitr;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
