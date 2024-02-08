@@ -83,9 +83,7 @@ struct WeightLogView: View {
         if let encodedEntries = try? JSONEncoder().encode(entries) {
             UserDefaults.standard.set(encodedEntries, forKey: "weightEntries")
         }
-        
-        print(entries)
-        
+                
         weight = ""
         weightToConfirm = ""
     }
