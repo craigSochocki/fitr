@@ -6,78 +6,63 @@
 //
 
 import SwiftUI
+import Charts
 
 struct WeightChartView: View {
     var entries: [WeightEntry]
     
-    private var maxWeight: Double {
-        entries.max(by: { $0.weight < $1.weight })?.weight ?? 0
-    }
-    
-    private var adjustedMaxWeight: Double {
-        let margin = (maxWeight - minWeight) * 0.1
-        return maxWeight + margin
-    }
-    
-    private var minWeight: Double {
-        entries.min(by: { $0.weight < $1.weight })?.weight ?? 0
-    }
-    
-    private func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        return formatter.string(from: date)
+    // Sort entries by timestamp
+    var sortedEntries: [WeightEntry] {
+        entries.sorted { $0.timestamp < $1.timestamp }
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            let height = geometry.size.height
-            let weightRange = maxWeight - minWeight
+        Chart(sortedEntries) { entry in
+            LineMark(
+                x: .value("Date", entry.timestamp),
+                y: .value("Weight (lbs)", entry.weight))
+            .interpolationMethod(.catmullRom)
             
-            let scale = height / (weightRange > 0 ? weightRange : 1)
-            
-            let topY = (maxWeight - maxWeight) * scale // This will be 0 (top of chart)
-            let bottomY = (maxWeight - minWeight) * scale // Map minWeight to the bottom
-            Path { path in
-                for (index, entry) in entries.enumerated() {
-                    let xPosition = geometry.size.width / CGFloat(entries.count - 1) * CGFloat(index)
-                    
-                    let weightNormalized = CGFloat((entry.weight - minWeight) / (adjustedMaxWeight - minWeight))
-                    
-                    let yPosition = (1 - weightNormalized) * (geometry.size.height - 20)
-                    
-                    if index == 0 {
-                        path.move(to: CGPoint(x: xPosition, y: yPosition))
-                    } else {
-                        path.addLine(to: CGPoint(x: xPosition, y: yPosition))
-                    }
-                }
+            PointMark(
+                x: .value("Date", entry.timestamp),
+                y: .value("Weight (lbs)", entry.weight)).symbolSize(10).foregroundStyle(.blue)
+        }
+        
+        .chartXAxis {
+            AxisMarks(position: .bottom, values: .automatic) {
+                AxisGridLine()
+                AxisValueLabel(format: .dateTime.month().day(), centered: true)
             }
-            .stroke(Color.blue, lineWidth: 2)
-            
-            Path { path in
-                
-                [topY, bottomY].forEach { yPosition in
-                    path.move(to: CGPoint(x: 0, y: yPosition))
-                    path.addLine(to: CGPoint(x: geometry.size.width, y: yPosition))
-                }}
-                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-            
-            // y-axis labels at the edges
-            VStack {
-                Text("\(entries.max(by: { $0.weight < $1.weight })?.weight ?? 0, specifier: "%.0f") lbs")
-                Spacer()
-                Text("\(entries.min(by: { $0.weight < $1.weight })?.weight ?? 0, specifier: "%.0f") lbs")
+        }
+        .chartYAxis {
+            AxisMarks(position: .leading) {
+                AxisValueLabel()
+                AxisTick()
+                AxisGridLine()
             }
-            .padding(.leading)
-            
-            // x-axis labels (start and end dates)
-            HStack {
-                Text(formatDate(entries.first?.timestamp ?? Date()))
-                Spacer()
-                Text(formatDate(entries.last?.timestamp ?? Date()))
-            }
-            .padding(.top, geometry.size.height)
+        }
+        .chartOverlay {
+            proxy in
+            GeometryReader { geo in
+                Rectangle().fill(.clear).contentShape(Rectangle())
+                    .gesture(
+                        DragGesture()
+                            .onChanged {
+                                value in
+                                let location = value.location
+                                
+                                if let date: Date = proxy.value(atX: location.x),
+                                   let weight: Double = proxy.value(atY: location.y) {
+                                    print("Date: \(date), Weight:  \(weight)")
+                                }
+                            })}
         }
     }
+}
+
+let viewModel = WeightEntriesViewModel()
+let entries = viewModel.entries
+
+#Preview {
+    WeightChartView(entries: entries)
 }

@@ -39,7 +39,8 @@ class WeightEntriesViewModel: ObservableObject {
     }
 }
 
-struct WeightEntry: Codable {
+struct WeightEntry: Codable, Identifiable {
+    var id = UUID()
     let weight: Double
     let timestamp: Date
 }
