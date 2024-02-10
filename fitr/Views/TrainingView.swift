@@ -14,6 +14,7 @@ struct TrainingView: View {
             Text("Training View")
                 .fontWeight(.semibold)
             Spacer()
+            Text("Stay tuned...")
         }
     }
 }
