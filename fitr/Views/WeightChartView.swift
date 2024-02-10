@@ -41,22 +41,6 @@ struct WeightChartView: View {
                 AxisGridLine()
             }
         }
-        .chartOverlay {
-            proxy in
-            GeometryReader { geo in
-                Rectangle().fill(.clear).contentShape(Rectangle())
-                    .gesture(
-                        DragGesture()
-                            .onChanged {
-                                value in
-                                let location = value.location
-                                
-                                if let date: Date = proxy.value(atX: location.x),
-                                   let weight: Double = proxy.value(atY: location.y) {
-                                    print("Date: \(date), Weight:  \(weight)")
-                                }
-                            })}
-        }
     }
 }
 
