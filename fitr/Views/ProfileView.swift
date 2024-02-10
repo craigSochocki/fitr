@@ -83,6 +83,7 @@ struct AthleteAttributesView: View {
             HStack {
                 Text("Weight")
                 Spacer()
+//            TODO: Link this with logged weights
                 Text("\(profile.weight) pounds")
             }
             HStack {
