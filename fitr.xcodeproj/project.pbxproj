@@ -14,6 +14,12 @@
 		B84031FD2B75498800885C13 /* WeightTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84031FC2B75498800885C13 /* WeightTrackerView.swift */; };
 		B84032032B75782C00885C13 /* WeightEntriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032022B75782C00885C13 /* WeightEntriesViewModel.swift */; };
 		B84032052B76837A00885C13 /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032042B76837A00885C13 /* WeightChartView.swift */; };
+		B84032072B76FFED00885C13 /* FitrTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032062B76FFED00885C13 /* FitrTabView.swift */; };
+		B84032092B7700F000885C13 /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032082B7700F000885C13 /* TrainingView.swift */; };
+		B840320B2B77010900885C13 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B840320A2B77010900885C13 /* ProgressView.swift */; };
+		B840320D2B77011600885C13 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B840320C2B77011600885C13 /* ProfileView.swift */; };
+		B84032102B77028B00885C13 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B840320F2B77028B00885C13 /* Profile.swift */; };
+		B84032122B7702B500885C13 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84032112B7702B500885C13 /* MockData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +31,12 @@
 		B84031FC2B75498800885C13 /* WeightTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTrackerView.swift; sourceTree = "<group>"; };
 		B84032022B75782C00885C13 /* WeightEntriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntriesViewModel.swift; sourceTree = "<group>"; };
 		B84032042B76837A00885C13 /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
+		B84032062B76FFED00885C13 /* FitrTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitrTabView.swift; sourceTree = "<group>"; };
+		B84032082B7700F000885C13 /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
+		B840320A2B77010900885C13 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		B840320C2B77011600885C13 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B840320F2B77028B00885C13 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		B84032112B7702B500885C13 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +69,8 @@
 		B84031ED2B75440100885C13 /* fitr */ = {
 			isa = PBXGroup;
 			children = (
+				B840320E2B77012B00885C13 /* Views */,
 				B84031EE2B75440100885C13 /* fitrApp.swift */,
-				B84031F02B75440100885C13 /* WeightLogView.swift */,
-				B84032042B76837A00885C13 /* WeightChartView.swift */,
-				B84031FC2B75498800885C13 /* WeightTrackerView.swift */,
-				B84032022B75782C00885C13 /* WeightEntriesViewModel.swift */,
 				B84031F22B75440200885C13 /* Assets.xcassets */,
 				B84031F42B75440200885C13 /* Preview Content */,
 			);
@@ -74,6 +83,23 @@
 				B84031F52B75440200885C13 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B840320E2B77012B00885C13 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B84032022B75782C00885C13 /* WeightEntriesViewModel.swift */,
+				B840320C2B77011600885C13 /* ProfileView.swift */,
+				B84032112B7702B500885C13 /* MockData.swift */,
+				B840320F2B77028B00885C13 /* Profile.swift */,
+				B840320A2B77010900885C13 /* ProgressView.swift */,
+				B84032062B76FFED00885C13 /* FitrTabView.swift */,
+				B84032082B7700F000885C13 /* TrainingView.swift */,
+				B84031FC2B75498800885C13 /* WeightTrackerView.swift */,
+				B84032042B76837A00885C13 /* WeightChartView.swift */,
+				B84031F02B75440100885C13 /* WeightLogView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,10 +173,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B84032052B76837A00885C13 /* WeightChartView.swift in Sources */,
+				B84032102B77028B00885C13 /* Profile.swift in Sources */,
+				B840320D2B77011600885C13 /* ProfileView.swift in Sources */,
 				B84031F12B75440100885C13 /* WeightLogView.swift in Sources */,
 				B84031EF2B75440100885C13 /* fitrApp.swift in Sources */,
 				B84031FD2B75498800885C13 /* WeightTrackerView.swift in Sources */,
 				B84032032B75782C00885C13 /* WeightEntriesViewModel.swift in Sources */,
+				B840320B2B77010900885C13 /* ProgressView.swift in Sources */,
+				B84032092B7700F000885C13 /* TrainingView.swift in Sources */,
+				B84032122B7702B500885C13 /* MockData.swift in Sources */,
+				B84032072B76FFED00885C13 /* FitrTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

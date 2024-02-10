@@ -11,7 +11,7 @@ import SwiftUI
 struct fitrApp: App {
     var body: some Scene {
         WindowGroup {
-            WeightTrackerView()
+            FitrTabView()
         }
     }
 }
