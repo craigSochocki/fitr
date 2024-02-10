@@ -10,55 +10,62 @@ import SwiftUI
 struct WeightLogView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: WeightEntriesViewModel
-    @State private var weight: String = ""
+    @State private var selectedWeight: Int = 150
+    @State private var  selectedDate: Date = Date()
+    let weightRange: [Int] = Array(100...500)
     @State private var showingConfirmationAlert = false
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Enter your current weight:")) {
-                    TextField("Weight (lbs)", text: $weight)
-                        .keyboardType(.decimalPad)
+                    Picker("Weight (lbs)", selection: $selectedWeight) {
+                        ForEach(weightRange, id: \.self) { weight in
+                            Text("\(weight) lbs").tag(weight)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    .frame(height: 150)
+                }
+                Section {
+                    DatePicker("Date", selection: $selectedDate, displayedComponents: .date)
+                        .datePickerStyle(.compact)
                 }
                 Button("Log") {
                     submitWeight()
                 }
             }
             .navigationTitle("Weight Logger")
+            .onAppear {
+                if let latestWeight = viewModel.entries.last?.weight {
+                    selectedWeight = Int(latestWeight)
+                }
+            }
             .alert("Confirm Weight", isPresented: $showingConfirmationAlert) {
                 Button("Cancel", role: .cancel) {}
                 Button("Yes", role: .destructive) {
                     confirmAndLogWeight()
                 }
             } message: {
-                Text("The weight you entered (\(weight) lbs) seems outside the typical range.  Are you sure this is correct?")
+                Text("The weight you entered (\(selectedWeight) lbs) seems outside the typical range.  Are you sure this is correct?")
             }
         }
     }
     
     private func submitWeight() {
-        guard !weight.trimmingCharacters(in: .whitespaces).isEmpty,
-                let weightValue = Double(weight),
-              !weight.isEmpty else {
-            // Weight is blank or not a number, don't log
-            return
-        }
-        
-        if weightValue < 100 || weightValue > 500 {
+        if selectedWeight < 100 || selectedWeight > 500 {
             showingConfirmationAlert = true
         } else {
-            logWeight(weightValue)
+            logWeight(Double(selectedWeight))
         }
     }
     
     private func confirmAndLogWeight() {
-        if let weightValue = Double(weight) {
-            logWeight(weightValue)
-        }
+        logWeight(Double(selectedWeight))
     }
     
     private func logWeight(_ weight: Double) {
-        viewModel.addEntry(weight: weight)
+        viewModel.addEntry(weight: weight, date: selectedDate)
         presentationMode.wrappedValue.dismiss()
     }
 }

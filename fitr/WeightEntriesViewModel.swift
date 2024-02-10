@@ -14,8 +14,8 @@ class WeightEntriesViewModel: ObservableObject {
         loadEntries()
     }
     
-    func addEntry(weight: Double, timestamp: Date = Date()) {
-        let newEntry = WeightEntry(weight: weight, timestamp: timestamp)
+    func addEntry(weight: Double, date: Date) {
+        let newEntry = WeightEntry(weight: weight, timestamp: date)
         entries.append(newEntry)
         saveEntries()
     }
