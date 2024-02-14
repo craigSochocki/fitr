@@ -9,6 +9,8 @@ import Foundation
 
 class UserAuthViewModel: ObservableObject {
     @Published var isLoggedIn: Bool
+    @Published var currentUsername: String?
+    @Published var isAdmin: Bool = false
     
     init() {
         self.isLoggedIn = UserAuthViewModel.fetchLoginState()
@@ -26,6 +28,8 @@ class UserAuthViewModel: ObservableObject {
             if password == storedPassword {
                 DispatchQueue.main.async {
                     self.isLoggedIn = true
+                    self.currentUsername = username
+                    self.isAdmin = (username == "admin")
                     self.saveLoginState(isLoggedIn: self.isLoggedIn)
                     completion(true, nil) // Login successful
                 }
@@ -46,6 +50,8 @@ class UserAuthViewModel: ObservableObject {
         // Logout logic here
         DispatchQueue.main.async {
             self.isLoggedIn = false
+            self.currentUsername = nil
+            self.isAdmin = false
             self.saveLoginState(isLoggedIn: self.isLoggedIn)
         }
     }

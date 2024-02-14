@@ -42,7 +42,7 @@ struct FitrTabView: View {
                     }
             }
             
-            SettingsView(viewModel: userAuthViewModel)
+            SettingsView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
