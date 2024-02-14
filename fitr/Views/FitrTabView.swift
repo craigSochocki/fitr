@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct FitrTabView: View {
+    @EnvironmentObject var userAuthViewModel: UserAuthViewModel
+    // Init other view models here
+    @StateObject var userProfileViewModel = UserProfileViewModel()
+    @StateObject var weightTrackingViewModel = WeightTrackingViewModel()
+    
+    
     var body: some View {
         TabView {
             TrainingView()
@@ -15,15 +21,31 @@ struct FitrTabView: View {
                     Image(systemName: "calendar")
                     Text("Training")
                 }
-            ProgressView()
-                .tabItem{
-                    Image(systemName: "chart.xyaxis.line")
-                    Text("Progress")
-                }
-            ProfileView(profile: MockData.sampleProfile)
-                .tabItem{
-                    Image(systemName: "person")
-                    Text("Profile")
+            //                ProgressView()
+            //                    .tabItem{
+            //                        Image(systemName: "chart.xyaxis.line")
+            //                        Text("Progress")
+            //                    }
+            
+            // Profile and weight tracking only available when user is logged in
+            if userAuthViewModel.isLoggedIn {
+                ProfileView(viewModel: userProfileViewModel)
+                    .tabItem{
+                        Image(systemName: "person")
+                        Text("Profile")
+                    }
+                
+                WeightTrackerView(viewModel: weightTrackingViewModel)
+                    .tabItem {
+                        Image(systemName: "chart.xyaxis.line")
+                        Text("Progress")
+                    }
+            }
+            
+            SettingsView(viewModel: userAuthViewModel)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
                 }
         }
     }

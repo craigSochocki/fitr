@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Profile: Identifiable {
+struct Profile: Codable, Identifiable {
     let id: UUID
     let name: String
     let age: Int

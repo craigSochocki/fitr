@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProgressView: View {
     var body: some View {
-        WeightTrackerView()
+        WeightTrackerView(viewModel: WeightTrackingViewModel())
     }
 }
 

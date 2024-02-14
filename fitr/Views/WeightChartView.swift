@@ -25,7 +25,7 @@ struct WeightChartView: View {
             
             PointMark(
                 x: .value("Date", entry.timestamp),
-                y: .value("Weight (lbs)", entry.weight)).symbolSize(10).foregroundStyle(.blue)
+                y: .value("Weight (lbs)", entry.weight)).symbolSize(10)
         }
         
         .chartXAxis {
@@ -44,8 +44,8 @@ struct WeightChartView: View {
     }
 }
 
-let viewModel = WeightEntriesViewModel()
-let entries = viewModel.entries
+let viewModel = WeightTrackingViewModel()
+let entries = viewModel.weightEntries
 
 #Preview {
     WeightChartView(entries: entries)

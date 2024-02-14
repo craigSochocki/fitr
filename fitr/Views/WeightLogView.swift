@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeightLogView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel: WeightEntriesViewModel
+    @ObservedObject var viewModel: WeightTrackingViewModel
     @State private var selectedWeight: Int = 150
     @State private var  selectedDate: Date = Date()
     let weightRange: [Int] = Array(100...500)
@@ -17,38 +17,41 @@ struct WeightLogView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("Enter your current weight:")) {
-                    Picker("Weight (lbs)", selection: $selectedWeight) {
-                        ForEach(weightRange, id: \.self) { weight in
-                            Text("\(weight) lbs").tag(weight)
+            VStack {
+                Form {
+                    Section(header: Text("Enter your current weight:")) {
+                        Picker("Weight (lbs)", selection: $selectedWeight) {
+                            ForEach(weightRange, id: \.self) { weight in
+                                Text("\(weight) lbs").tag(weight)
+                            }
                         }
+                        .pickerStyle(.wheel)
+                        .frame(height: 150)
                     }
-                    .pickerStyle(.wheel)
-                    .frame(height: 150)
+                    Section {
+                        DatePicker("Date", selection: $selectedDate, displayedComponents: .date)
+                            .datePickerStyle(.compact)
+                    }
+                    
                 }
-                Section {
-                    DatePicker("Date", selection: $selectedDate, displayedComponents: .date)
-                        .datePickerStyle(.compact)
+                .navigationTitle("Weight Logger")
+                .onAppear {
+                    if let latestWeight = viewModel.weightEntries.last?.weight {
+                        selectedWeight = Int(latestWeight)
+                    }
                 }
-                Button("Log") {
+                .alert("Confirm Weight", isPresented: $showingConfirmationAlert) {
+                    Button("Cancel", role: .cancel) {}
+                    Button("Yes", role: .destructive) {
+                        confirmAndLogWeight()
+                    }
+                } message: {
+                    Text("The weight you entered (\(selectedWeight) lbs) seems outside the typical range.  Are you sure this is correct?")
+                }
+                Button("Log Weight") {
                     submitWeight()
-                }
-            }
-            .navigationTitle("Weight Logger")
-            .onAppear {
-                if let latestWeight = viewModel.entries.last?.weight {
-                    selectedWeight = Int(latestWeight)
-                }
-            }
-            .alert("Confirm Weight", isPresented: $showingConfirmationAlert) {
-                Button("Cancel", role: .cancel) {}
-                Button("Yes", role: .destructive) {
-                    confirmAndLogWeight()
-                }
-            } message: {
-                Text("The weight you entered (\(selectedWeight) lbs) seems outside the typical range.  Are you sure this is correct?")
-            }
+                }.buttonStyle(.borderedProminent)
+                Spacer()}
         }
     }
     

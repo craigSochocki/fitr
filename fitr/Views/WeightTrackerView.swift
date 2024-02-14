@@ -9,20 +9,20 @@ import SwiftUI
 
 struct WeightTrackerView: View {
     
-    @StateObject var viewModel = WeightEntriesViewModel()
+    @ObservedObject var viewModel: WeightTrackingViewModel
     @State private var showingLogView = false
     @State private var showingClearConfirmation = false
     
     var body: some View {
         NavigationView {
             VStack {
-                if viewModel.entries.isEmpty {
+                if viewModel.weightEntries.isEmpty {
                     // No entries have been logged
                     Text("No weights have been logged yet.")
                         .foregroundColor(.secondary)
                         .padding()
                 } else {
-                    WeightChartView(entries: viewModel.entries)
+                    WeightChartView(entries: viewModel.weightEntries)
                         .frame(height: 200)
                         .padding()
                 }
@@ -63,5 +63,5 @@ private let dateFormatter: DateFormatter = {
 }()
 
 #Preview {
-    WeightTrackerView()
+    WeightTrackerView(viewModel: WeightTrackingViewModel())
 }

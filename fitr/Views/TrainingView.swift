@@ -9,12 +9,14 @@ import SwiftUI
 
 struct TrainingView: View {
     var body: some View {
-        VStack {
-            Spacer()
-            Text("Training View")
-                .fontWeight(.semibold)
-            Spacer()
-            Text("Stay tuned...")
+        NavigationView {
+            VStack {
+                NavigationLink(destination: LogWorkoutView()) {
+                    Text("Log Workout")
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                }
+            }.navigationTitle("Training")
         }
     }
 }

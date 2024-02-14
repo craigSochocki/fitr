@@ -7,13 +7,33 @@
 
 import Foundation
 
-class WeightEntriesViewModel: ObservableObject {
+class WeightEntriesViewModel_DEPRECATED: ObservableObject {
     @Published var entries: [WeightEntry] = []
     @Published var loggedInUser: Profile?
     
     init() {
-        self.loggedInUser = Profile(name: "John Doe", age: 32, weight: 245, profilePicURL: "https://example.com/profile.jpg")
+        loadUserProfile()
         loadEntries()
+    }
+    
+    func loadUserProfile() {
+        let decoder = JSONDecoder()
+        if let userData = UserDefaults.standard.data(forKey: "userProfile"),
+           let userProfile = try? decoder.decode(Profile.self, from: userData) {
+            loggedInUser = userProfile
+        }
+    }
+    
+    func loadMockData() {
+        self.loggedInUser = Profile(name: "John Doe", age: 32, weight: 315, profilePicURL: "https://example.com/profile.jpg")
+    }
+    
+    func saveUserProfile(_ profile: Profile) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(profile) {
+            UserDefaults.standard.set(encoded, forKey: "userProfile")
+            loggedInUser = profile
+        }
     }
     
     func addEntry(weight: Double, date: Date) {
@@ -26,6 +46,10 @@ class WeightEntriesViewModel: ObservableObject {
     func clearEntries() {
         entries.removeAll() // clear array of entries
         UserDefaults.standard.removeObject(forKey: "weightEntries")
+    }
+    
+    func deleteAllUsers() {
+        UserDefaults.standard.removeObject(forKey: "userProfile")
     }
     
     private func loadEntries() {

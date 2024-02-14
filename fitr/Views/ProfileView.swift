@@ -8,25 +8,20 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
-    let profile: Profile
+    @ObservedObject var viewModel: UserProfileViewModel
     
     var body: some View {
         NavigationView {
             VStack(spacing: 15) {
                 Spacer()
                 LifetimeMetricsView()
-                AthleteAttributesView(profile: profile)
+                if let userProfile = viewModel.userProfile {
+                    AthleteAttributesView(profile: userProfile)
+                }
                 
-            }.navigationTitle(profile.name)
+            }.navigationTitle(viewModel.userProfile?.name ?? "Profile")
         }
         
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(profile: MockData.sampleProfile)
     }
 }
 
@@ -36,7 +31,7 @@ struct LifetimeMetricsView: View {
             Spacer()
             Circle()
                 .frame(width: 75, height: 75)
-                .foregroundColor(Color("brandPrimary"))
+                .foregroundColor(Color("AccentColor"))
                 .overlay(
                     Text("CS")
                         .font(.title)
@@ -70,7 +65,6 @@ struct LifetimeMetricsView: View {
 }
 
 struct AthleteAttributesView: View {
-    
     let profile: Profile
     
     var body: some View {
@@ -97,5 +91,5 @@ struct AthleteAttributesView: View {
 
 
 #Preview {
-    ProfileView(profile: MockData.sampleProfile)
+    ProfileView(viewModel: UserProfileViewModel())
 }
