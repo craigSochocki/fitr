@@ -10,13 +10,11 @@ import Foundation
 struct WeightEntry: Codable, Identifiable {
     var id = UUID()
     let weight: Double
-    let timestamp: Date
-    let userID: UUID // refers to Profile ID
+    let date: Date
     
-    init(id: UUID = UUID(), weight: Double, timestamp: Date, userID: UUID){
+    init(id: UUID = UUID(), weight: Double, date: Date){
         self.id = id
         self.weight = weight
-        self.timestamp = timestamp
-        self.userID = userID
+        self.date = date
     }
 }

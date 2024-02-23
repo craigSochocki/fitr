@@ -11,20 +11,20 @@ import Charts
 struct WeightChartView: View {
     var entries: [WeightEntry]
     
-    // Sort entries by timestamp
+    // Sort entries by date
     var sortedEntries: [WeightEntry] {
-        entries.sorted { $0.timestamp < $1.timestamp }
+        entries.sorted { $0.date < $1.date }
     }
     
     var body: some View {
         Chart(sortedEntries) { entry in
             LineMark(
-                x: .value("Date", entry.timestamp),
+                x: .value("Date", entry.date),
                 y: .value("Weight (lbs)", entry.weight))
             .interpolationMethod(.catmullRom)
             
             PointMark(
-                x: .value("Date", entry.timestamp),
+                x: .value("Date", entry.date),
                 y: .value("Weight (lbs)", entry.weight)).symbolSize(10)
         }
         

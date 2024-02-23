@@ -11,7 +11,7 @@ struct WeightTrackerView: View {
     
     @ObservedObject var viewModel: WeightTrackingViewModel
     @State private var showingLogView = false
-    @State private var showingClearConfirmation = false
+    @State private var showingClearConfirmation = false 
     
     var body: some View {
         NavigationView {
